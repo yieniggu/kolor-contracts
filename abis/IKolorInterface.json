@@ -1,0 +1,294 @@
+{
+  "contractName": "IKolorInterface",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.0+commit.c7dfd78e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IKolorInterface.sol\":\"IKolorInterface\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":50},\"remappings\":[]},\"sources\":{\"project:/contracts/IKolorInterface.sol\":{\"keccak256\":\"0xc0f1430dcd591b41a4ecd7d4b1a21f23d18ba8208c73113b524673632c0026fb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://32721bfefb194aabeb76c51fa07ff86e1c640f11133bc6b28e72bc3a17065034\",\"dweb:/ipfs/QmdZPkaXjoYwEzg3v7LNdvtvu2jY2TjsnqyttZRbN8z2Vr\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ninterface IKolorInterface {\n    function mint(address to, uint256 amount) external;\n}\n",
+  "sourcePath": "/home/basti/Desktop/activate/vcu3/contracts/IKolorInterface.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IKolorInterface.sol",
+    "exportedSymbols": {
+      "IKolorInterface": [
+        2177
+      ]
+    },
+    "id": 2178,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2169,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:15"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 2177,
+        "linearizedBaseContracts": [
+          2177
+        ],
+        "name": "IKolorInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "40c10f19",
+            "id": 2176,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2171,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2176,
+                  "src": "103:10:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2170,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "103:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2173,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2176,
+                  "src": "115:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "115:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "102:28:15"
+            },
+            "returnParameters": {
+              "id": 2175,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "139:0:15"
+            },
+            "scope": 2177,
+            "src": "89:51:15",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2178,
+        "src": "57:85:15"
+      }
+    ],
+    "src": "32:111:15"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/IKolorInterface.sol",
+    "exportedSymbols": {
+      "IKolorInterface": [
+        2177
+      ]
+    },
+    "id": 2178,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2169,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:23:15"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 2177,
+        "linearizedBaseContracts": [
+          2177
+        ],
+        "name": "IKolorInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "40c10f19",
+            "id": 2176,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "mint",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 2174,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 2171,
+                  "mutability": "mutable",
+                  "name": "to",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2176,
+                  "src": "103:10:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 2170,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "103:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 2173,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 2176,
+                  "src": "115:14:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 2172,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "115:7:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "102:28:15"
+            },
+            "returnParameters": {
+              "id": 2175,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "139:0:15"
+            },
+            "scope": 2177,
+            "src": "89:51:15",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 2178,
+        "src": "57:85:15"
+      }
+    ],
+    "src": "32:111:15"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.0+commit.c7dfd78e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2022-03-24T18:05:35.775Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
