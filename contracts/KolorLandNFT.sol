@@ -82,7 +82,7 @@ contract KolorLandNFT is
     mapping(uint256 => mapping(uint256 => GeoSpatialPoint)) public points;
     mapping(uint256 => uint256) public totalPoints;
 
-    mapping(address => bool) public isAuthorized;
+    mapping(address => bool) public isAuthorized; //hot wallet, owner is cold wallet
 
     function safeMint(
         address to,
@@ -165,7 +165,7 @@ contract KolorLandNFT is
     }
 
     function isLandOwner(address landOwner, uint256 tokenId)
-        internal
+        public
         view
         returns (bool)
     {
@@ -199,8 +199,13 @@ contract KolorLandNFT is
         address newLandOwner,
         string memory name
     ) public override onlyAuthorized notBurned(tokenId) {
+        address currentOwner = landOwnerOf(tokenId);
+
         mintedNFTSInfo[tokenId].landOwner = newLandOwner;
         mintedNFTSInfo[tokenId].landOwnerAlias = name;
+
+        _totalLandOwned[currentOwner]--;
+        _totalLandOwned[newLandOwner]++;
     }
 
     /**  
@@ -285,7 +290,7 @@ contract KolorLandNFT is
         returns (uint256)
     {
         require(
-            index < balanceOf(landOwner) + 1,
+            index < totalLandOwnedOf(landOwner), // TODO: REPLACE FOR TOTALLANDOWNED OF
             "landowner index out of bounds"
         );
 

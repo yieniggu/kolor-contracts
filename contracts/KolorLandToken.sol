@@ -91,6 +91,10 @@ contract KolorLandToken is Ownable {
         external
         onlyAuthorized
     {
+        require(
+            landTokensInfo[tokenId].initialAmount == 0,
+            "KolorLandToken: token info already initialized!"
+        );
         require(exists(tokenId), "KolorLandToken: land must exists!");
 
         landTokensInfo[tokenId].initialAmount = initialAmount;
@@ -130,7 +134,7 @@ contract KolorLandToken is Ownable {
     ) public onlyAuthorized {
         require(exists(tokenId), "KolorLandToken: land must exists!");
         require(
-            availableTokensOf(tokenId) - amount >= 0,
+            availableTokensOf(tokenId) >= amount,
             "KolorLandToken: exceeds max amount"
         );
 
@@ -232,11 +236,19 @@ contract KolorLandToken is Ownable {
         marketplaceAddress = newAddress;
     }
 
-    function totalInvestmentsOfAddress(address account) public view returns (uint256) {
+    function totalInvestmentsOfAddress(address account)
+        public
+        view
+        returns (uint256)
+    {
         return totalInvestmentsByAddress[account];
     }
 
-    function totalInvestmentsOfLand(uint256 tokenId) public view returns (uint256) {
+    function totalInvestmentsOfLand(uint256 tokenId)
+        public
+        view
+        returns (uint256)
+    {
         return totalInvestmentsByLand[tokenId];
     }
 

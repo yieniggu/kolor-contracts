@@ -19,10 +19,6 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
     // Address of the nft contract and kolor
     address public KolorLandNFTAddress;
 
-    // Mapping from token Id to the timestamp when it was staked
-    // in this contract
-    mapping(uint256 => uint256) private lockStartTime;
-
     // mapping from account to its offsets
     mapping(address => mapping(uint256 => OffsetEmission))
         public offsetsByAddress;
@@ -54,6 +50,9 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
     function removeLand(uint256 tokenId) public onlyAuthorized nonReentrant {
         IKolorLandNFT ilandInterface = IKolorLandNFT(KolorLandNFTAddress);
 
+        ERC721 erc721 = ERC721(KolorLandNFTAddress);
+        erc721.safeTransferFrom(address(this), owner(), tokenId);
+
         // update the land state to paused
         ilandInterface.updateLandState(tokenId, State.Paused);
     }
@@ -67,7 +66,7 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
         uint256 emissions,
         uint256 vcuPrice,
         address account
-    ) external payable onlyAuthorized nonReentrant {
+    ) external onlyAuthorized nonReentrant {
         IKolorLandNFT ilandInterface = IKolorLandNFT(KolorLandNFTAddress);
         KolorLandNFT kolorLand = KolorLandNFT(KolorLandNFTAddress);
         IERC721 erc721 = IERC721(KolorLandNFTAddress);
@@ -155,28 +154,36 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
         totalOffsetsOfLand[tokenId]++;
     }
 
-    function totalOffsetsOf(address account) public view returns (uint256) {
+    function _totalOffsetsOfAddress(address account)
+        public
+        view
+        returns (uint256)
+    {
         return totalOffsetsOfAddress[account];
     }
 
-    function totalOffsetsOf(uint256 tokenId) public view returns (uint256) {
+    function _totalOffsetsOfLand(uint256 tokenId)
+        public
+        view
+        returns (uint256)
+    {
         return totalOffsetsOfLand[tokenId];
     }
 
     /**
         @dev returns offsets of given land
     */
-    function offsetsOf(uint256 tokenId)
+    function offsetsOfLand(uint256 tokenId)
         public
         view
         returns (OffsetEmission[] memory)
     {
-        uint256 _totalOffsetsOf = totalOffsetsOf(tokenId);
+        uint256 _totalOffsetsOf = _totalOffsetsOfLand(tokenId);
 
         OffsetEmission[] memory offsets = new OffsetEmission[](_totalOffsetsOf);
 
         for (uint256 i = 0; i < _totalOffsetsOf; i++) {
-            offsets[i] = offsetInfo(i, tokenId);
+            offsets[i] = offsetInfoByLand(i, tokenId);
         }
 
         return offsets;
@@ -185,17 +192,17 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
     /**
         @dev returns offsets of given account
     */
-    function offsetsOf(address account)
+    function offsetsOfAddress(address account)
         public
         view
         returns (OffsetEmission[] memory)
     {
-        uint256 _totalOffsetsOf = totalOffsetsOf(account);
+        uint256 _totalOffsetsOf = _totalOffsetsOfAddress(account);
 
         OffsetEmission[] memory offsets = new OffsetEmission[](_totalOffsetsOf);
 
         for (uint256 i = 0; i < _totalOffsetsOf; i++) {
-            offsets[i] = offsetInfo(i, account);
+            offsets[i] = offsetInfoByAddress(i, account);
         }
 
         return offsets;
@@ -205,7 +212,7 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
         @dev returns offset info of given land and offset
         
     */
-    function offsetInfo(uint256 offsetId, uint256 tokenId)
+    function offsetInfoByLand(uint256 offsetId, uint256 tokenId)
         public
         view
         returns (OffsetEmission memory)
@@ -217,19 +224,12 @@ contract KolorMarketplace is Ownable, ReentrancyGuard, IERC721Receiver {
         @dev returns offset info of given account and offset
         
     */
-    function offsetInfo(uint256 offsetId, address account)
+    function offsetInfoByAddress(uint256 offsetId, address account)
         public
         view
         returns (OffsetEmission memory)
     {
         return offsetsByAddress[account][offsetId];
-    }
-
-    /**
-        @dev Returns the amount of CELO in this contract
-     */
-    function getBalance() public view returns (uint256) {
-        return address(this).balance;
     }
 
     function authorize(address manager) public onlyOwner {
