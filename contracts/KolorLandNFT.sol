@@ -117,13 +117,13 @@ contract KolorLandNFT is
 
         uint256 _landsOwned = _totalLandOwned[landOwner];
         // set the tokenId to current landowner collection index
-        ownedLands[to][_landsOwned] = currentTokenId;
+        ownedLands[landOwner][_landsOwned] = currentTokenId;
 
         // update the tokenId index in landowner collection
         landIndex[currentTokenId] = _landsOwned;
 
         // increase total lands owned by address
-        _totalLandOwned[to]++;
+        _totalLandOwned[landOwner]++;
     }
 
     function authorize(address manager) public onlyOwner {
@@ -194,20 +194,6 @@ contract KolorLandNFT is
         mintedNFTSInfo[tokenId].state = _state;
     }
 
-    function updateLandOwner(
-        uint256 tokenId,
-        address newLandOwner,
-        string memory name
-    ) public override onlyAuthorized notBurned(tokenId) {
-        address currentOwner = landOwnerOf(tokenId);
-
-        mintedNFTSInfo[tokenId].landOwner = newLandOwner;
-        mintedNFTSInfo[tokenId].landOwnerAlias = name;
-
-        _totalLandOwned[currentOwner]--;
-        _totalLandOwned[newLandOwner]++;
-    }
-
     /**  
         @dev adds a new buyer to this land 
     */
@@ -217,8 +203,10 @@ contract KolorLandNFT is
         onlyMarketplace
         notBurned(tokenId)
     {
-        buyers[tokenId][newBuyer] = true;
-        totalBuyers[tokenId]++;
+        if (!buyers[tokenId][newBuyer]) {
+            buyers[tokenId][newBuyer] = true;
+            totalBuyers[tokenId]++;
+        }
     }
 
     function updateName(uint256 tokenId, string memory newName)
@@ -239,6 +227,10 @@ contract KolorLandNFT is
         address landOwner = mintedNFTSInfo[tokenId].landOwner;
 
         return landOwner;
+    }
+
+    function landIndexOf(uint256 tokenId) public view returns (uint256) {
+        return landIndex[tokenId];
     }
 
     function isBuyerOf(uint256 tokenId, address buyer)
