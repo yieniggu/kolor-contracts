@@ -17,12 +17,6 @@ interface IKolorLandNFT {
      */
     function updateLandState(uint256 tokenId, State state) external;
 
-    function updateLandOwner(
-        uint256 tokenId,
-        address newLandOwner,
-        string memory name
-    ) external;
-
     function addBuyer(uint256 tokenId, address newBuyer) external;
 
     function updateName(uint256 tokenId, string memory name) external;
